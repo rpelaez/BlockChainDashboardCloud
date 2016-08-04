@@ -6,7 +6,7 @@
         "name": "Atlassian",
         "url": "http://www.atlassian.com"
     },
-    "baseUrl": "{{localBaseUrl}}",
+    "baseUrl": "https://raw.githubusercontent.com/rpelaez/BlockChainDashboardCloud/master/",
     "authentication": {
         "type": "jwt"
     },
