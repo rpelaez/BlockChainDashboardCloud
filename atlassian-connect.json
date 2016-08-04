@@ -8,12 +8,9 @@
     },
     "baseUrl": "https://raw.githubusercontent.com/rpelaez/BlockChainDashboardCloud/master/",
     "authentication": {
-        "type": "jwt"
+        "type": "none"
     },
-    "enableLicensing": false,
-    "lifecycle": {
-        "installed": "/installed"
-    },
+    
     "modules": {
         "jiraDashboardItems": [
             {
