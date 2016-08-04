@@ -1,0 +1,41 @@
+{
+    "key": "atlassian-connect-jira-dashboard-item-example",
+    "name": "Atlassian Connect JIRA Dashboard Item Example",
+    "description": "Dashboard-item test add-on",
+    "vendor": {
+        "name": "Atlassian",
+        "url": "http://www.atlassian.com"
+    },
+    "baseUrl": "{{localBaseUrl}}",
+    "authentication": {
+        "type": "jwt"
+    },
+    "enableLicensing": false,
+    "lifecycle": {
+        "installed": "/installed"
+    },
+    "modules": {
+        "jiraDashboardItems": [
+            {
+                "name" : {
+                    "value" : "Issues in project",
+                    "i18n" : "issues.in.project.i18n"
+                },
+                "url" : "/issues-in-project?dashboard={dashboard.id}&dashboardItem={dashboardItem.id}",
+                "key" : "iframe-requests",
+                "description" : {
+                    "value" : "Issues in project dashboard item",
+                    "i18n" : "issues.in.project.description.i18n"
+                },
+
+                "thumbnailUrl": "/thumbnail",
+                "configurable" : true,
+                "conditions" : [{
+                        "condition": "/condition?view={dashboardItem.viewType}&dashboard={dashboard.id}&dashboardItem={dashboardItem.id}"
+                }]
+            }
+        ]
+    },
+    "scopes": ["READ", "WRITE"]
+}
+
