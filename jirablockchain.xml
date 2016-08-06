@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs
+    title="JIRA BlockChain Viewer"
+    author="Raul Pelaez raulpelaez@gmail.com"
+    thumbnail="jirablockchain-thumbnail.png"
+    screenshot="jirablockchain-screenshot.png"
+    description="Control all time the price of the BlockChain currencies: Bitcoin, Litecoin, Ethereum, Ethereum Classic, Voxels">
+
+    <Require feature="minimessage" />
+    <Require feature="dynamic-height" />
+    <Require feature="auth-refresh"/>
+    <Require feature="oauthpopup" />
+    <Require feature="setprefs" />
+    <Require feature="settitle" />
+    <Require feature="core" />
+    <Require feature="core.io" />
+    <Require feature="views" />
+    <Optional feature="atlassian.util" />
+    <Optional feature="gadget-directory">
+      <Param name="categories">Other</Param>
+    </Optional>
+  </ModulePrefs>
+
+  <Content type="html">
+  <![CDATA[
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script>
+function refrescar() {
+jQuery.ajax({
+            url: "https://coinmarketcap-nexuist.rhcloud.com/api/eth",
+            type: "GET",
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(json) {
+                document.getElementById("eth").innerHTML= (Math.round(json.price.eur * 10000) / 10000)+" EUR";
+                document.getElementById("eth1").innerHTML= (Math.round(json.price.usd * 10000) / 10000)+" USD"; 
+                if ( json.change[0] == "-" ) 
+                	color = "<font color='red'>"+json.change+"</font>";
+                else 
+                 	color = "<font color='green'>"+json.change+"</font>";
+                document.getElementById("eth_change").innerHTML= color;
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            },
+
+            timeout: 120000,
+        });
+jQuery.ajax({
+            url: "https://coinmarketcap-nexuist.rhcloud.com/api/btc",
+            type: "GET",
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(json) {
+                document.getElementById("btc").innerHTML= (Math.round(json.price.eur * 10000) / 10000)+" EUR";
+                document.getElementById("btc1").innerHTML= (Math.round(json.price.usd * 10000) / 10000)+" USD";
+                if ( json.change[0] == "-" ) 
+                	color = "<font color='red'>"+json.change+"</font>";
+                else 
+                 	color = "<font color='green'>"+json.change+"</font>";
+                document.getElementById("btc_change").innerHTML= color;
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            },
+
+            timeout: 120000,
+        });
+jQuery.ajax({
+            url: "https://coinmarketcap-nexuist.rhcloud.com/api/ltc",
+            type: "GET",
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(json) {
+                document.getElementById("ltc").innerHTML= (Math.round(json.price.eur * 10000) / 10000)+" EUR"; 
+                document.getElementById("ltc1").innerHTML= (Math.round(json.price.usd * 10000) / 10000)+" USD"; 
+                if ( json.change[0] == "-" ) 
+                	color = "<font color='red'>"+json.change+"</font>";
+                else 
+                 	color = "<font color='green'>"+json.change+"</font>";
+                document.getElementById("ltc_change").innerHTML= color;
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            },
+
+            timeout: 120000,
+        });
+jQuery.ajax({
+            url: "https://coinmarketcap-nexuist.rhcloud.com/api/vox",
+            type: "GET",
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(json) {
+                document.getElementById("vox").innerHTML= (Math.round(json.price.eur * 10000) / 10000)+" EUR"; 
+                document.getElementById("vox1").innerHTML= (Math.round(json.price.usd * 10000) / 10000)+" USD"; 
+                if ( json.change[0] == "-" ) 
+                	color = "<font color='red'>"+json.change+"</font>";
+                else 
+                 	color = "<font color='green'>"+json.change+"</font>";
+                document.getElementById("vox_change").innerHTML= color;
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            },
+
+            timeout: 120000,
+        });
+jQuery.ajax({
+            url: "https://coinmarketcap-nexuist.rhcloud.com/api/etc",
+            type: "GET",
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(json) {
+                document.getElementById("etc").innerHTML= (Math.round(json.price.eur * 10000) / 10000)+" EUR"; 
+                document.getElementById("etc1").innerHTML= (Math.round(json.price.usd * 10000) / 10000)+" USD"; 
+                if ( json.change[0] == "-" ) 
+                	color = "<font color='red'>"+json.change+"</font>";
+                else 
+                 	color = "<font color='green'>"+json.change+"</font>";
+                document.getElementById("etc_change").innerHTML= color;
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            },
+
+            timeout: 120000,
+        });
+}
+
+refrescar();
+var timeout = setTimeout(reloadValues, 5000);
+
+function reloadValues () {
+        refrescar();
+        timeout = setTimeout(reloadValues, 5000);
+}
+
+</script>
+<style>
+.button {
+  color: #900;
+  font-weight: bold;
+  font-size: 150%;
+  text-transform: uppercase;
+  width: 100%;
+  background: #FF0;
+  border: 1px solid #900;
+}
+
+body {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; font-style: normal; 
+}
+</style>
+<!--<input type="button" name="REFRESH" value="REFRESH" onclick="javascript:refrescar();" class="button"></input><br>-->
+<div style="overflow: auto; width: 100%; height: 100%;">
+<table>
+<tr><td><b><u>COIN</u></b></td><td><font align="right"><b><u>PRICE</u></b></font></td><td><a href="https://play.google.com/store/apps/details?id=com.phonegap.rauliki.blockchainviewer&hl=en" target="new"><img src="https://jirasupport.files.wordpress.com/2016/07/en_badge_web_generic.png" width="80px"></a></td><td><td><font align="right"><b><u>CHANGE</u></b></font></td><td><b><u><font align="right">GRAPH</font></u></b> <a href="https://jirasupport.wordpress.com/" target="new">[SUAJ!]</a></td></tr>
+<tr><td><b>ETH</b></td><td><font align="right" color="#7c06b7"><div id="eth"></div></font></td><td><font align="right" color="green"><div id="eth1"></div></font></td><td><td><font align="right"><div id="eth_change"></div></font></td><td><img src="https://files.coinmarketcap.com/generated/sparklines/1027.png" border=1></td></tr>
+<tr><td><b>ETC</b></td><td><font align="right" color="#7c06b7"><div id="etc"></div></font></td><td><font align="right" color="green"><div id="etc1"></div></font></td><td><td><font align="right"><div id="etc_change"></div></font></td><td><img src="https://files.coinmarketcap.com/generated/sparklines/1321.png" border=1></td></tr>
+<tr><td><b>VOX</b></td><td><font align="right" color="#7c06b7"><div id="vox"></div></font></td><td><font align="right" color="green"><div id="vox1"></div></font></td><td><td><font align="right"><div id="vox_change"></div></font></td><td><img src="https://files.coinmarketcap.com/generated/sparklines/1208.png" border=1></td></tr>
+<tr><td><b>LTC</b></td><td><font align="right" color="#7c06b7"><div id="ltc"></div></font></td><td><font align="right" color="green"><div id="ltc1"></div></font></td><td><td><font align="right"><div id="ltc_change"></div></font></td><td><img src="https://files.coinmarketcap.com/generated/sparklines/2.png" border=1></td></tr>
+<tr><td><b>BTC</b></td><td><font align="right" color="#7c06b7"><div id="btc"></div></font></td><td><font align="right" color="green"><div id="btc1"></div></font></td><td><td><font align="right"><div id="btc_change"></div></font></td><td><img src="https://files.coinmarketcap.com/generated/sparklines/1.png" border=1></td></tr>
+</table>
+</div>
+  ]]>
+</Content>
+</Module>
