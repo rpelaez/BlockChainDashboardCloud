@@ -5,15 +5,15 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script>
 function refrescar() {
+
 jQuery.ajax({
             url: "https://api.uphold.com/v0/ticker/ETH",
             type: "GET",
             
-            contentType: 'application/json; charset=utf-8',
+    		contentType: 'application/json; charset=utf-8;access-control-allow-origin: *',
+    		
             success: function(json) {
-                //document.getElementById("eth").innerHTML= (Math.round(json.price.eur * 10000) / 10000)+" EUR";
-                //document.getElementById("eth1").innerHTML= (Math.round(json.price.usd * 10000) / 10000)+" USD";
-                document.getElementById("eth1").innerHTML= json[0].bid;
+                 document.getElementById("eth1").innerHTML= "HOLA"; 
                
             },
             error : function(jqXHR, textStatus, errorThrown) {
@@ -21,7 +21,6 @@ jQuery.ajax({
 
             timeout: 120000,
         });
-
 
 jQuery.ajax({
             url: "https://coinmarketcap-nexuist.rhcloud.com/api/eth",
